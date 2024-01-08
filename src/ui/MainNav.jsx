@@ -1,3 +1,4 @@
+import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import {
@@ -58,36 +59,36 @@ function MainNav() {
   return (
     <nav>
       <NavList>
-        <NavLink>
-          <StyledNavLink href="/dashboard">
+        <li>
+          <StyledNavLink to="/dashboard">
             <HiOutlineHome />
             <span>Home</span>
           </StyledNavLink>
-        </NavLink>
-        <NavLink>
-          <StyledNavLink href="/bookings">
+        </li>
+        <li>
+          <StyledNavLink to="/bookings">
             <HiOutlineCalendarDays />
             <span>Bookings</span>
           </StyledNavLink>
-        </NavLink>
-        <NavLink>
-          <StyledNavLink href="/cabins">
+        </li>
+        <li>
+          <StyledNavLink to="/cabins">
             <HiOutlineHomeModern />
             <span>Cabins</span>
           </StyledNavLink>
-        </NavLink>
-        <NavLink>
-          <StyledNavLink href="/users">
+        </li>
+        <li>
+          <StyledNavLink to="/users">
             <HiOutlineUsers />
             <span>Users</span>
           </StyledNavLink>
-        </NavLink>
-        <NavLink>
-          <StyledNavLink href="/settings">
+        </li>
+        <li>
+          <StyledNavLink to="/settings">
             <HiOutlineCog6Tooth />
             <span>Settings</span>
           </StyledNavLink>
-        </NavLink>
+        </li>
       </NavList>
     </nav>
   );

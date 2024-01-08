@@ -1,8 +1,12 @@
+import React from "react";
 import styled from "styled-components";
+import { useCabins } from "./useCabins";
+
+import Spinner from "../../ui/Spinner";
+import CabinRow from "./CabinRow";
 
 const Table = styled.div`
   border: 1px solid var(--color-grey-200);
-
   font-size: 1.4rem;
   background-color: var(--color-grey-0);
   border-radius: 7px;
@@ -23,3 +27,27 @@ const TableHeader = styled.header`
   color: var(--color-grey-600);
   padding: 1.6rem 2.4rem;
 `;
+
+function CabinTable() {
+  const { isLoading, cabins, error } = useCabins();
+
+  if (isLoading) return <Spinner></Spinner>;
+
+  return (
+    <Table role="table">
+      <TableHeader role="row">
+        <div></div>
+        <div>Cabin</div>
+        <div>Capacity</div>
+        <div>Price</div>
+        <div>Discount</div>
+        <div></div>
+      </TableHeader>
+      {cabins?.map((cabin) => (
+        <CabinRow cabin={cabin} key={cabin.id}></CabinRow>
+      ))}
+    </Table>
+  );
+}
+
+export default CabinTable;

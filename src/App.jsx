@@ -1,5 +1,9 @@
+import React from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import { Fragment } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { Toaster } from "react-hot-toast";
+
 import GlobalStyles from "./styles/GlobalStyles";
 import Dashboard from "./pages/Dashboard";
 import Bookings from "./pages/Bookings";
@@ -11,9 +15,53 @@ import Login from "./pages/Login";
 import PageNotFound from "./pages/PageNotFound";
 import AppLayout from "./ui/AppLayout";
 
+/* React Query
+-> Managing remote(server) state 
+-> Data is stored in a cache - same data to different componnts but one request 
+-> Automatic loading and error states
+-> Automatic re-fetching to keep state sync 
+-> Pre-fetching (used in pagination)
+-> Easy to update 
+-> Offline support
+useQuery hook - to sava data 
+useMutation hook - to update data 
+Set up a catche: 
+*/
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      // data in a cache will stay valid for
+      staleTime: 0,
+    },
+  },
+});
+
+function renderToastNotification() {
+  return (
+    <Toaster
+      position="top-center"
+      gutter={12}
+      containerStyle={{ margin: "8px" }}
+      toastOptions={{
+        success: { duration: 3000 },
+        error: { duration: 5000 },
+        style: {
+          fontSize: "16px",
+          maxWidth: "500px",
+          padding: "16px 24px",
+          backgroundColor: "var(--color-grey-0)",
+          color: "var(--color-grey-700)",
+        },
+      }}
+    />
+  );
+}
+
 function App() {
   return (
-    <Fragment>
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false} />
+      {renderToastNotification()}
       <GlobalStyles />
       <BrowserRouter>
         <Routes>
@@ -30,7 +78,7 @@ function App() {
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
-    </Fragment>
+    </QueryClientProvider>
   );
 }
 
