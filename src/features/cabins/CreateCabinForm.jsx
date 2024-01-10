@@ -1,12 +1,12 @@
 import React from "react";
 
 import { useForm } from "react-hook-form";
-import { Input } from "../../ui/Input";
 import { Button } from "../../ui/Button";
 import FormRow, { StyledFormRow } from "../../ui/FormRow";
 import { useCreateCabin } from "./useCreateCabin";
 import { useEditCabin } from "./useEditCabin";
 
+import Input from "../../ui/Input";
 import Form from "../../ui/Form";
 import FileInput from "../../ui/FileInput";
 import Textarea from "../../ui/Textarea";
@@ -15,10 +15,11 @@ function CreateCabinForm({ cabinToEdit = {} }) {
   const { id: editId, ...editValues } = cabinToEdit;
   const { createCabin, isAdding } = useCreateCabin();
   const { editCabin, isEdditing } = useEditCabin();
+  const isEditSession = Boolean(editId);
   const { register, handleSubmit, reset, getValues, formState } = useForm({
     defaultValues: isEditSession ? editValues : {},
   });
-  const isEditSession = Boolean(editId);
+
   const { errors } = formState;
   const loading = isAdding || isEdditing;
 

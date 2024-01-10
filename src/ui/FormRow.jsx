@@ -27,7 +27,7 @@ export const StyledFormRow = styled.div`
     gap: 1.2rem;
   }
 `;
-function FormRow({ label, error, children }) {
+function FormRow({ label, error = undefined, children }) {
   const Label = styled.label`
     font-weight: 500;
   `;
